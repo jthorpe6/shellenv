@@ -1,0 +1,79 @@
+#!/bin/bash
+
+alias ipinfo="curl ifconfig.me"
+alias pyhttpd='python3 -m http.server'
+alias pyftpd='python3 -m pyftpdlib'
+
+# Tempoary ssh; dont save to known hosts
+alias tssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias tscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+# Too many times have I just set aliases and the program not installed. Not anymore
+
+if type emacs &>/dev/null
+then
+    alias emacsclient='emacsclient -s ~/.emacs.d/server/server'
+    alias ec='emacsclient -s ~/.emacs.d/server/server'
+fi
+
+if type exa &>/dev/null
+then
+    alias ls='exa --long --header --git '
+    alias ll='exa --long --header --git --tree --icons '
+fi
+
+if type rg &>/dev/null
+then
+    CONFIGFILE="${HOME}/.ripgrep"
+    if [ -f $CONFIGFILE ]
+    then
+cat <<EOF > $CONFIGFILE
+--max-columns=150
+--max-columns-preview
+--smart-case
+--colors=column:none
+--colors=column:fg:4
+--colors=column:style:underline
+
+--colors=line:none
+--colors=line:fg:4
+
+--colors=match:none
+--colors=match:bg:0
+--colors=match:fg:6
+
+--colors=path:none
+--colors=path:fg:14
+--colors=path:style:bold
+EOF
+    fi
+    alias grep='rg'
+fi
+
+if type prettyping &>/dev/null
+then
+    alias ping='prettyping --nolegend'
+fi
+
+if type bat &>/dev/null
+then
+    alias preview="fzf --preview 'bat --color \"always\" --theme Nord {}'"
+    alias cat='bat -pp --theme Nord '
+    alias less='bat --theme Nord '
+fi
+
+if type brew &>/dev/null
+then
+    alias bupdate='brew update && brew upgrade && brew cleanup -s'
+fi
+
+# lldb stuff
+if type lldb &>/dev/null
+then
+    alias lldbmr='lldb -s <(echo -e "b main\n run")'
+    alias lldbr='lldb -o run'
+    if [ -f "$HOME/Documents/opt/lisa.py/lisa.py" ]
+    then
+        alias lisa='lldb -s <(echo -e command script import ~/Documents/opt/lisa.py/lisa.py) -s <(echo -e command script import ~/Documents/opt/polar.py)'
+    fi
+fi

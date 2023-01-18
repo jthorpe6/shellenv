@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+function pullallthethings(){
+    /bin/ls | xargs -I{} git -C {} pull
+}
+
+function gi() { 
+    curl -sLw n "https://www.toptal.com/developers/gitignore/api/$@"
+}
+
+function encrypt() {
+    local FILE=$1
+    tar cz "$FILE" | openssl enc -aes-256-cbc -e -v > "$FILE.tar.gz.enc"
+}
+
+function synhilight(){
+    FILENAME=$1
+    if [[ -z "$FILENAME" ]]
+    then
+	    printf "%s" "filename?: "
+	    read -r FILENAME
+    fi
+
+    pygmentize -f rtf -l r "$FILENAME" | pbcopy
+}
+
+if type emacs &>/dev/null
+then
+    function magit(){
+            if [ -d "$1" ]; then
+                cd "$1" || exit
+            fi
+            emacsclient -s ~/.emacs.d/server/server --eval "(magit)" --no-wait
+    }
+
+    function htmlorg() {
+        ORGFILE=$1
+        if [[ -z "$ORGFILE" ]]
+        then
+        	echo -e "Usage: $funcstack[1] <file.org> "
+        return
+        fi
+        emacs $ORGFILE --batch -q \
+         --eval '(setq user-full-name nil)' \
+         --eval '(setq org-html-validation-link nil)' \
+         --eval '(setq org-export-html-postamble nil)' \
+         --eval "(setq org-export-htmlize-output-type 'css)" \
+          -f org-html-export-to-html --kill
+    }
+fi
+
+function ghidra() {
+    GHIDRA_BUILD="ghidra_10.3_DEV"
+    GHIDRA_DIR="$HOME/Documents/opt/$GHIDRA_BUILD/"
+    if [ -d $GHIDRA_DIR ]
+    then
+        cd $GHIDRA_DIR
+        ./ghidraRun
+        cd - &>/dev/null
+    else 
+        echo -e "[!] $GHIDRA_DIR not there"
+    fi
+}
