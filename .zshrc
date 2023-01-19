@@ -109,8 +109,8 @@ then
 fi
 
 # tmux config
-CONFIGFILE="${HOME}/.tmux/conf"
-if [ -f $CONFIGFILE ]
+CONFIGFILE="${HOME}/.tmux.conf"
+if [ ! -f $CONFIGFILE ]
 then
 cat <<EOF >$CONFIGFILE
 set -g default-terminal screen-256color
