@@ -13,7 +13,8 @@ alias tscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 if type emacs &>/dev/null
 then
     alias emacsclient='emacsclient -s ~/.emacs.d/server/server'
-    alias ec='emacsclient -s ~/.emacs.d/server/server'
+    alias ecc='emacsclient -s ~/.emacs.d/server/server'
+    alias ec='emacs'
 fi
 
 if type exa &>/dev/null
