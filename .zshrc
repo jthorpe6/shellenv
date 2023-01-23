@@ -111,6 +111,33 @@ then
     eval "$(register-python-argcomplete pipx)"
 fi
 
+# rg config
+if type rg &>/dev/null
+then
+    CONFIGFILE="${HOME}/.ripgrep"
+    if [ -f $CONFIGFILE ]
+    then
+cat <<EOF > $CONFIGFILE
+--max-columns=150
+--max-columns-preview
+--smart-case
+--colors=column:none
+--colors=column:fg:4
+--colors=column:style:underline
+
+--colors=line:none
+--colors=line:fg:4
+
+--colors=match:none
+--colors=match:bg:0
+--colors=match:fg:6
+
+--colors=path:none
+--colors=path:fg:14
+--colors=path:style:bold
+EOF
+    fi
+fi
 # tmux config
 CONFIGFILE="${HOME}/.tmux.conf"
 if [ ! -f $CONFIGFILE ]
