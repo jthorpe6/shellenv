@@ -48,9 +48,9 @@ test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
 
 # the prompt
-if [ -f "$HOME/.abbr_pwd" ]
+if [ -f "${HOME}/.abbr_pwd" ]
 then
-    source "$HOME/.abbr_pwd"
+    source "${HOME}/.abbr_pwd"
     
     git_branch() {
         ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
