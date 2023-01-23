@@ -44,6 +44,9 @@ fi
 # kdk path
 test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 
+# device Support
+test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
+
 # the prompt
 if [ -f "$HOME/.abbr_pwd" ]
 then
