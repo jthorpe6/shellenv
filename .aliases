@@ -47,6 +47,12 @@ then
     alias bupdate='brew update && brew upgrade && brew cleanup -s'
 fi
 
+if type brew-file &>/dev/null
+then
+    export HOMEBREW_BREWFILE_APPSTORE=0 
+    alias bremote='brew file update'
+fi
+
 # lldb stuff
 if type lldb &>/dev/null
 then
