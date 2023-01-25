@@ -48,7 +48,7 @@ test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
 
 # the prompt
-# this allows me to run export POWERLINE="true" && zsh to get a nice prompt for screenies
+# this allows me to run export POWERLINE=1 && source ${HOME}/.zshrc to get a nice prompt for screenies
 if [[ -n ${POWERLINE} ]]
 then
     if type powerline-shell &>/dev/null

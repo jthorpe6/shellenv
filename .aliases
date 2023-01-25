@@ -19,13 +19,20 @@ fi
 
 if type exa &>/dev/null
 then
-    alias ls='exa --long --header --git '
-    alias ll='exa --long --header --git --tree --icons '
+    alias ls='exa'
+    alias ll='exa --long --header --git'
+    alias lt='exa --long --header --git --icons --tree'
+fi
+
+if type powerline-shell &>/dev/null
+then
+    alias powerline="export POWERLINE=1 && exec zsh -l"
+    alias unpowerline="unset POWERLINE && exec zsh -l"
 fi
 
 if type prettyping &>/dev/null
 then
-    alias ping='prettyping --nolegend'
+    alias pping='prettyping --nolegend'
 fi
 
 if type bat &>/dev/null
