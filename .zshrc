@@ -48,7 +48,33 @@ test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
 
 # the prompt
-if [ -f "${HOME}/.abbr_pwd" ]
+# this allows me to run export POWERLINE="true" && zsh to get a nice prompt for screenies
+if [[ -n ${POWERLINE} ]]
+then
+    if type powerline-shell &>/dev/null
+    then
+        function powerline_precmd() {
+            PS1="$(powerline-shell --shell zsh $?)"
+        }
+
+        function install_powerline_precmd() {
+            for s in "${precmd_functions[@]}"
+            do
+                if [ "$s" = "powerline_precmd" ]
+                then
+                    return
+                fi
+            done
+            precmd_functions+=(powerline_precmd)
+        }
+
+        if [ "$TERM" != "linux" -a -x "$(command -v powerline-shell)" ]
+        then
+            install_powerline_precmd
+        fi
+    fi
+
+elif [ -f "${HOME}/.abbr_pwd" ]
 then
     source "${HOME}/.abbr_pwd"
     
