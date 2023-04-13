@@ -44,7 +44,7 @@ then
          --eval '(setq user-full-name nil)' \
          --eval '(setq org-html-validation-link nil)' \
          --eval '(setq org-export-html-postamble nil)' \
-         --eval "(setq org-export-htmlize-output-type 'css)" \
+         --eval "(setq org-export-htmlize-output-type \'css)" \
           -f org-html-export-to-html --kill
     }
 fi
