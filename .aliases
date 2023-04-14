@@ -14,7 +14,7 @@ if type emacs &>/dev/null
 then
     alias emacsclient='emacsclient -s ~/.emacs.d/server/server'
     alias ec='emacsclient -nw -c -s ~/.emacs.d/server/server'
-    alias ecc='emacsclient -c -s ~/.emacs.d/server/server'
+    alias ecc='emacsclient -n -c -s ~/.emacs.d/server/server'
     alias emacs='emacs --daemon'
 fi
 
