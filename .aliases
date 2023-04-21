@@ -63,4 +63,8 @@ then
     then
         alias lisa='lldb -s <(echo -e command script import ~/Documents/opt/lisa.py/lisa.py) -s <(echo -e command script import ~/Documents/opt/polar.py)'
     fi
+    if [ -f "$HOME/Documents/opt/lldbinit/lldbinit.py" ]
+    then
+        alias lldbinit='lldb -s <(echo -e command script import ~/Documents/opt/lldbinit/lldbinit.py)'
+    fi
 fi
