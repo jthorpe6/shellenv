@@ -30,7 +30,7 @@ then
             if [ -d "$1" ]; then
                 cd "$1" || exit
             fi
-            emacsclient -s ~/.emacs.d/server/server --eval "(magit)" --no-wait
+            emacsclient -nw -c -s ~/.emacs.d/server/server --eval "(magit)" --no-wait
     }
 
     function htmlorg() {
