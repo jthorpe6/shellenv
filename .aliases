@@ -67,4 +67,8 @@ then
     then
         alias lldbinit='lldb -s <(echo -e command script import ~/Documents/opt/lldbinit/lldbinit.py)'
     fi
+    if [ -f "$HOME/Documents/opt/llef/llef.py" ]
+    then
+	alias llef='lldb -s <(echo -e command script import "/Users/jthorpe/Documents/opt/llef/llef.py"\\nsettings set stop-disassembly-display never)'
+    fi
 fi
