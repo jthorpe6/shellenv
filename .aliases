@@ -51,7 +51,7 @@ fi
 if type brew-file &>/dev/null
 then
     export HOMEBREW_BREWFILE_APPSTORE=0 
-    alias bremote='brew file update'
+    alias bremote='brew-file init && brew-file push'
 fi
 
 # lldb stuff
