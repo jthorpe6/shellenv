@@ -95,9 +95,11 @@ then
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
             export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_branch)%F{8}]%% %f"
+	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ $VIRTUAL_ENV ]
         then
     	    export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV)%F{8}]%% %f"
+	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ -d ".git" ]
         then
             export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(git_branch)%F{8}]%% %f"
