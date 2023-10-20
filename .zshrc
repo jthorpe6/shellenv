@@ -78,13 +78,23 @@ elif [ -f "${HOME}/.abbr_pwd" ]
 then
     source "${HOME}/.abbr_pwd"
     
-    git_branch() {
-	ref=$(git symbolic-ref -q --short HEAD 2>/dev/null)
-	if [ -z "$ref" ]; then
-            ref=$(git rev-parse --short HEAD)
+    git_info() {
+	branch=$(git symbolic-ref -q --short HEAD 2>/dev/null)
+	if [ -n "$branch" ]; then
+            echo "$branch"
+            return
 	fi
-	echo "$ref"
+
+	tag=$(git describe --tags --exact-match --abbrev=0 HEAD 2>/dev/null)
+	if [ -n "$tag" ]; then
+            echo "$tag"
+            return
+	fi
+
+	commit=$(git rev-parse --short HEAD)
+	echo "$commit"
     }
+
 
     precmd() {
         if [ "$TERM_PROGRAM" = "iTerm.app" ]
@@ -97,7 +107,7 @@ then
 
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
-            export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_branch)%F{8}]%% %f"
+            export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_info)%F{8}]%% %f"
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ $VIRTUAL_ENV ]
         then
@@ -105,7 +115,7 @@ then
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ -d ".git" ]
         then
-            export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(git_branch)%F{8}]%% %f"
+            export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8} %f$(git_info)%F{8}]%% %f"
         else
     	    export PS1="%F{8}[%F{4}$(pwd_abbr)%F{8}]%% %f"
         fi
