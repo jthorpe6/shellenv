@@ -79,8 +79,11 @@ then
     source "${HOME}/.abbr_pwd"
     
     git_branch() {
-        ref=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        echo $ref
+	ref=$(git symbolic-ref -q --short HEAD 2>/dev/null)
+	if [ -z "$ref" ]; then
+            ref=$(git rev-parse --short HEAD)
+	fi
+	echo "$ref"
     }
 
     precmd() {
