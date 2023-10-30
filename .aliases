@@ -23,6 +23,7 @@ then
     alias ls='exa'
     alias ll='exa --long --header --git'
     alias lt='exa --long --header --git --icons --tree'
+    alias tree='exa --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
 fi
 
 if type powerline-shell &>/dev/null
