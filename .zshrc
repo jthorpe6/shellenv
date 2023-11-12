@@ -148,7 +148,12 @@ test -e "$(brew --prefix)/bin/virtualenvwrapper.sh" && source "$(brew --prefix)/
 # use bat for less
 if type bat &>/dev/null
 then
-    export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
+    if [ -f $(bat --config-dir)/themes/Catppuccin-mocha.tmTheme ]
+    then
+	export MANPAGER="sh -c 'col -bx | bat --theme Catppuccin-mocha -l man -p'"
+    else
+	export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
+    fi
 fi
 
 # for pipx
@@ -179,23 +184,23 @@ then
     if [ -f $CONFIGFILE ]
     then
 cat <<EOF > $CONFIGFILE
---max-columns=150
---max-columns-preview
---smart-case
---colors=column:none
---colors=column:fg:4
---colors=column:style:underline
+# --max-columns=150
+# --max-columns-preview
+# --smart-case
+# --colors=column:none
+# --colors=column:fg:4
+# --colors=column:style:underline
 
---colors=line:none
---colors=line:fg:4
+# --colors=line:none
+# --colors=line:fg:4
 
---colors=match:none
---colors=match:bg:0
---colors=match:fg:6
+# --colors=match:none
+# --colors=match:bg:0
+# --colors=match:fg:6
 
---colors=path:none
---colors=path:fg:14
---colors=path:style:bold
+# --colors=path:none
+# --colors=path:fg:14
+# --colors=path:style:bold
 EOF
     fi
 fi
@@ -219,7 +224,10 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'git@bitbucket.com:user/plugin'
 
 # nord theme
-set -g @plugin "arcticicestudio/nord-tmux"
+# set -g @plugin "arcticicestudio/nord-tmux"
+
+# catppuccin theme
+set -g @plugin 'catppuccin/tmux'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'

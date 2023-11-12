@@ -39,9 +39,18 @@ fi
 
 if type bat &>/dev/null
 then
-    alias preview="fzf --preview 'bat --color \"always\" --theme Nord {}'"
-    alias cat='bat -pp --theme Nord '
-    alias less='bat --theme Nord '
+    if [ -f $(bat --config-dir)/themes/Catppuccin-mocha.tmTheme ]
+    then
+	alias preview="fzf --preview 'bat --color \"always\" --theme Catppuccin-mocha {}'"
+	alias cat='bat -pp --theme Catppuccin-mocha '
+	alias less='bat --theme Catppuccin-mocha '
+    else
+	alias preview="fzf --preview 'bat --color \"always\" --theme Nord {}'"
+	alias cat='bat -pp --theme Nord '
+	alias less='bat --theme Nord '
+    fi
+    
+    
 fi
 
 if type brew &>/dev/null
