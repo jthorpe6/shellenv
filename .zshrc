@@ -107,22 +107,22 @@ then
 
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
-            export PS1="%F{8}[%F{2}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_info)%F{8}]%% %f"
+            export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_info)%F{8}]%% %f"
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ $VIRTUAL_ENV ]
         then
-    	    export PS1="%F{8}[%F{2}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV)%F{8}]%% %f"
+    	    export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV)%F{8}]%% %f"
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ -d ".git" ]
         then
-            export PS1="%F{8}[%F{2}$(pwd_abbr)%F{8} %f$(git_info)%F{8}]%% %f"
+            export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(git_info)%F{8}]%% %f"
         else
-	    export PS1="%F{8}[%F{2}$(pwd_abbr)%F{8}]%% %f"
+	    export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8}]%% %f"
         fi
     }
 else
     # export PS1="%F{8}[%F{4}%~%F{8}]%% %f"
-    export PS1="%F{8}[%F{2}%~%F{8}]%% %f"
+    export PS1="%F{8}[%F{3}%~%F{8}]%% %f"
 fi
 
 # my aliases & functions
