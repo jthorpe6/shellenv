@@ -157,6 +157,14 @@ then
     fi
 fi
 
+# for pyenv
+if type pyenc &>/dev/null
+then
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 # for pipx
 if type pipx &>/dev/null
 then
