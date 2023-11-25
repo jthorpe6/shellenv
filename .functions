@@ -48,16 +48,3 @@ then
           -f org-html-export-to-html --kill
     }
 fi
-
-function ghidra() {
-    GHIDRA_BUILD="ghidra_10.3_DEV"
-    GHIDRA_DIR="$HOME/Documents/opt/$GHIDRA_BUILD/"
-    if [ -d $GHIDRA_DIR ]
-    then
-        cd $GHIDRA_DIR
-        ./ghidraRun
-        cd - &>/dev/null
-    else 
-        echo -e "[!] $GHIDRA_DIR not there"
-    fi
-}
