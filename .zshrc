@@ -48,33 +48,7 @@ test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
 
 # the prompt
-# this allows me to run export POWERLINE=1 && source ${HOME}/.zshrc to get a nice prompt for screenies
-if [[ -n ${POWERLINE} ]]
-then
-    if type powerline-shell &>/dev/null
-    then
-        function powerline_precmd() {
-            PS1="$(powerline-shell --shell zsh $?)"
-        }
-
-        function install_powerline_precmd() {
-            for s in "${precmd_functions[@]}"
-            do
-                if [ "$s" = "powerline_precmd" ]
-                then
-                    return
-                fi
-            done
-            precmd_functions+=(powerline_precmd)
-        }
-
-        if [ "$TERM" != "linux" -a -x "$(command -v powerline-shell)" ]
-        then
-            install_powerline_precmd
-        fi
-    fi
-
-elif [ -f "${HOME}/.abbr_pwd" ]
+if [ -f "${HOME}/.abbr_pwd" ]
 then
     source "${HOME}/.abbr_pwd"
     
@@ -97,13 +71,13 @@ then
 
 
     precmd() {
-        if [ "$TERM_PROGRAM" = "iTerm.app" ]
-        then
-           # Needed because of this: https://gitlab.com/gnachman/iterm2/-/issues/8755
-           window_title="\e]0;$(pwd_abbr)\a"
-           echo -ne "$window_title"
-           test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-        fi
+        # if [ "$TERM_PROGRAM" = "iTerm.app" ]
+        # then
+        #    # Needed because of this: https://gitlab.com/gnachman/iterm2/-/issues/8755
+        #    window_title="\e]0;$(pwd_abbr)\a"
+        #    echo -ne "$window_title"
+        #    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+        # fi
 
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
