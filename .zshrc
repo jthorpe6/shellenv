@@ -196,6 +196,8 @@ set -g default-terminal screen-256color
 set-option -g status-interval 1
 set-option -g automatic-rename on
 set-option -g automatic-rename-format '#{b:pane_current_path}'
+set-option -g set-titles on
+set-option -g set-titles-string '#{b:pane_current_path} - #{pane_current_command}'
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
