@@ -26,12 +26,6 @@ then
     alias tree='exa --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
 fi
 
-if type powerline-shell &>/dev/null
-then
-    alias powerline="export POWERLINE=1 && exec zsh -l"
-    alias unpowerline="unset POWERLINE && exec zsh -l"
-fi
-
 if type prettyping &>/dev/null
 then
     alias pping='prettyping --nolegend'
