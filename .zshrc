@@ -41,6 +41,9 @@ then
     export iphoneos_sdk="$($XCRUN --show-sdk-path -sdk iphoneos)/"
 fi
 
+# llvm
+test -d "$(brew --prefix)/Cellar/llvm/" && export llvms="$(brew --prefix)/Cellar/llvm/"
+
 # kdk path
 test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 
