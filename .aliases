@@ -43,13 +43,11 @@ then
 	alias cat='bat -pp --theme Nord '
 	alias less='bat --theme Nord '
     fi
-    
-    
 fi
 
 if type brew &>/dev/null
 then
-    alias bupdate='brew update && brew upgrade && brew cleanup -s'
+    alias bupdate='brew update && brew upgrade; brew cleanup -s'
 fi
 
 if type brew-file &>/dev/null
