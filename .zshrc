@@ -84,22 +84,22 @@ then
 
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
-            export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV) %f$(git_info)%F{8}]%% %f"
+            export PS1="%F{7}[%F{8}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV) %F{2}$(git_info)%F{7}]%% %f"
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ $VIRTUAL_ENV ]
         then
-    	    export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(basename $VIRTUAL_ENV)%F{8}]%% %f"
+    	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV)%F{7}]%% %f"
 	    PATH="$VIRTUAL_ENV/bin:$PATH"
         elif [ -d ".git" ]
         then
-            export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8} %f$(git_info)%F{8}]%% %f"
+            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(git_info)%F{7}]%% %f"
         else
-	    export PS1="%F{8}[%F{3}$(pwd_abbr)%F{8}]%% %f"
+	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
         fi
     }
 else
     # export PS1="%F{8}[%F{4}%~%F{8}]%% %f"
-    export PS1="%F{8}[%F{3}%~%F{8}]%% %f"
+    export PS1="%F{7}[%F{7}%~%F{7}]%% %f"
 fi
 
 # my aliases & functions
@@ -126,12 +126,13 @@ test -e "$(brew --prefix)/bin/virtualenvwrapper.sh" && source "$(brew --prefix)/
 # use bat for less
 if type bat &>/dev/null
 then
-    if [ -f $(bat --config-dir)/themes/Catppuccin-mocha.tmTheme ]
-    then
-	export MANPAGER="sh -c 'col -bx | bat --theme Catppuccin-mocha -l man -p'"
-    else
-	export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
-    fi
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    # if [ -f $(bat --config-dir)/themes/Catppuccin-mocha.tmTheme ]
+    # then
+    # 	export MANPAGER="sh -c 'col -bx | bat --theme Catppuccin-mocha -l man -p'"
+    # else
+    # 	export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
+    # fi
 fi
 
 # for pyenv
@@ -140,6 +141,7 @@ then
     export PYENV_ROOT="$HOME/.pyenv"
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 # for pipx
@@ -215,7 +217,9 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin "arcticicestudio/nord-tmux"
 
 # catppuccin theme
-set -g @plugin 'catppuccin/tmux'
+# set -g @plugin 'catppuccin/tmux'
+
+set-option -g status-style "bg=white,fg=black"
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
