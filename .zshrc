@@ -229,15 +229,15 @@ fi
 
 # inside Terminal.app 
 # if we have a default tmux session attach to it, else start a new one
-if [[ "$TERM_PROGRAM" = "Apple_Terminal" && -z "$INSIDE_EMACS" ]]
-then
-    if type tmux &>/dev/null
-    then
-	if [[ $(tmux list-sessions -F '#{session_name}' 2>/dev/null ) == 0 ]]
-	then
-	    tmux attach
-	else
-	    tmux new
-	fi
-    fi
-fi
+# if [[ "$TERM_PROGRAM" = "Apple_Terminal" && -z "$INSIDE_EMACS" ]]
+# then
+#     if type tmux &>/dev/null
+#     then
+# 	if [[ $(tmux list-sessions -F '#{session_name}' 2>/dev/null ) == 0 ]]
+# 	then
+# 	    tmux attach
+# 	else
+# 	    tmux new
+# 	fi
+#     fi
+# fi
