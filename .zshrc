@@ -109,6 +109,9 @@ test -e "${HOME}/.aliases" && source "${HOME}/.aliases"
 # golang
 test -d "${HOME}/go/" && export GOPATH="${HOME}/go/"
 
+# rust
+test -d "${HOME}/.cargo/bin" && PATH="$PATH:${HOME}/.cargo/bin"
+
 # for grc command colours
 test -e "${HOME}/.grc.zsh" && source "${HOME}/.grc.zsh"
 
