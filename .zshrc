@@ -74,14 +74,6 @@ then
 
 
     precmd() {
-        # if [ "$TERM_PROGRAM" = "iTerm.app" ]
-        # then
-        #    # Needed because of this: https://gitlab.com/gnachman/iterm2/-/issues/8755
-        #    window_title="\e]0;$(pwd_abbr)\a"
-        #    echo -ne "$window_title"
-        #    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-        # fi
-
         if [ -d ".git" ] && [ $VIRTUAL_ENV ]
         then
             export PS1="%F{7}[%F{8}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV) %F{2}$(git_info)%F{7}]%% %f"
@@ -130,12 +122,6 @@ test -e "$(brew --prefix)/bin/virtualenvwrapper.sh" && source "$(brew --prefix)/
 if type bat &>/dev/null
 then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-    # if [ -f $(bat --config-dir)/themes/Catppuccin-mocha.tmTheme ]
-    # then
-    # 	export MANPAGER="sh -c 'col -bx | bat --theme Catppuccin-mocha -l man -p'"
-    # else
-    # 	export MANPAGER="sh -c 'col -bx | bat --theme Nord -l man -p'"
-    # fi
 fi
 
 # for pyenv
@@ -216,12 +202,6 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # set -g @plugin 'git@github.com:user/plugin'
 # set -g @plugin 'git@bitbucket.com:user/plugin'
 
-# nord theme
-# set -g @plugin "arcticicestudio/nord-tmux"
-
-# catppuccin theme
-# set -g @plugin 'catppuccin/tmux'
-
 set-option -g status-style "bg=white,fg=black"
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
@@ -229,18 +209,3 @@ run '~/.tmux/plugins/tpm/tpm'
 EOF
 mkdir -p "${HOME}/.tmux"
 fi
-
-# inside Terminal.app 
-# if we have a default tmux session attach to it, else start a new one
-# if [[ "$TERM_PROGRAM" = "Apple_Terminal" && -z "$INSIDE_EMACS" ]]
-# then
-#     if type tmux &>/dev/null
-#     then
-# 	if [[ $(tmux list-sessions -F '#{session_name}' 2>/dev/null ) == 0 ]]
-# 	then
-# 	    tmux attach
-# 	else
-# 	    tmux new
-# 	fi
-#     fi
-# fi
