@@ -4,9 +4,9 @@ function pullallthethings(){
     /bin/ls | xargs -I{} git -C {} pull
 }
 
-# function gi() { 
-#     curl -sLw n "https://www.toptal.com/developers/gitignore/api/$@"
-# }
+function gi() { 
+    curl -sLw n "https://www.toptal.com/developers/gitignore/api/$@"
+}
 
 function encrypt() {
     local FILE=$1
