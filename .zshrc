@@ -73,21 +73,57 @@ then
     }
 
 
+    # precmd() {
+    #     if [ -d ".git" ] && [ $VIRTUAL_ENV ]
+    #     then
+    #         export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV) %F{2}$(git_info)%F{7}]%% %f"
+    # 	    PATH="$VIRTUAL_ENV/bin:$PATH"
+    #     elif [ $VIRTUAL_ENV ]
+    #     then
+    # 	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV)%F{7}]%% %f"
+    # 	    PATH="$VIRTUAL_ENV/bin:$PATH"
+    #     elif [ -d ".git" ]
+    #     then
+    #         export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(git_info)%F{7}]%% %f"
+    #     else
+    # 	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
+    #     fi
+    # }
+
     precmd() {
-        if [ -d ".git" ] && [ $VIRTUAL_ENV ]
-        then
-            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV) %F{2}$(git_info)%F{7}]%% %f"
-	    PATH="$VIRTUAL_ENV/bin:$PATH"
-        elif [ $VIRTUAL_ENV ]
-        then
-    	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV)%F{7}]%% %f"
-	    PATH="$VIRTUAL_ENV/bin:$PATH"
-        elif [ -d ".git" ]
-        then
-            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(git_info)%F{7}]%% %f"
-        else
-	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
-        fi
+	local dir="$PWD"
+	local git_dir=""
+	while [ "$dir" != "/" ]; do
+            if [ -d "$dir/.git" ]; then
+		git_dir="$dir"
+		break
+            fi
+            dir="$(dirname "$dir")"
+	done
+
+	if [ -n "$git_dir" ]; then
+            local virtual_env=""
+            if [ -n "$VIRTUAL_ENV" ]; then
+		virtual_env="%F{2}$(basename "$VIRTUAL_ENV")%f "
+		PATH="$VIRTUAL_ENV/bin:$PATH"
+            fi
+            local git_info=""
+            if branch=$(git -C "$git_dir" symbolic-ref -q --short HEAD 2>/dev/null); then
+		git_info="$branch"
+            elif tag=$(git -C "$git_dir" describe --tags --exact-match --abbrev=0 HEAD 2>/dev/null); then
+		git_info="$tag"
+            else
+		git_info="$(git -C "$git_dir" rev-parse --short HEAD)"
+            fi
+            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} $virtual_env%F{2}$git_info%F{7}]%% %f"
+	else
+            if [ -n "$VIRTUAL_ENV" ]; then
+		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename "$VIRTUAL_ENV")%F{7}]%% %f"
+		PATH="$VIRTUAL_ENV/bin:$PATH"
+            else
+		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
+            fi
+	fi
     }
 else
     # export PS1="%F{8}[%F{4}%~%F{8}]%% %f"
