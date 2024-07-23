@@ -20,10 +20,10 @@ fi
 
 if type exa &>/dev/null
 then
-    alias ls='exa'
-    alias ll='exa --long --header --git'
-    alias lt='exa --long --header --git --icons --tree'
-    alias tree='exa --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
+    alias ls='eza'
+    alias ll='eza --long --header --git'
+    alias lt='eza --long --header --git --icons --tree'
+    alias tree='eza --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
 fi
 
 if type prettyping &>/dev/null
