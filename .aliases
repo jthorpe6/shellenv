@@ -18,7 +18,7 @@ then
     alias emacs='emacs --daemon'
 fi
 
-if type exa &>/dev/null
+if type eza &>/dev/null
 then
     alias ls='eza'
     alias ll='eza --long --header --git'
