@@ -15,9 +15,9 @@ if type brew &>/dev/null; then
     compinit
     export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/games:/usr/games:$HOME/.local/bin:$HOME/go/bin
 
-    source $(brew --prefix)/share/zsh/site-functions
-    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source "$(brew --prefix)"/share/zsh/site-functions
+    source "$(brew --prefix)"/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
     export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/games:/usr/games:$HOME/.local/bin
 fi
@@ -35,7 +35,7 @@ fi
 
 # macos or iphoneos sdk paths
 XCRUN=$(which xcrun)
-if [ ! -z $XCRUN ];
+if [ -n "$XCRUN" ];
 then
     export macosx_sdk="$($XCRUN --show-sdk-path -sdk macosx)/"
     export iphoneos_sdk="$($XCRUN --show-sdk-path -sdk iphoneos)/"
