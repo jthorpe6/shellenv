@@ -4,6 +4,9 @@ alias ipinfo="curl ifconfig.me"
 alias pyhttpd='python3 -m http.server'
 alias pyftpd='python3 -m pyftpdlib'
 
+# find / -name foo 2dn
+alias -g 2dn="2>/dev/null"
+
 # Tempoary ssh; dont save to known hosts
 alias tssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias tscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
