@@ -12,7 +12,7 @@ cmds=(
   blkid
   cc
   configure
-  curl
+#  curl
   cvs
   df
   diff
@@ -22,7 +22,7 @@ cmds=(
   docker-compose
   docker-machine
   du
-  env
+#  env
   fdisk
   findmnt
   free
@@ -50,7 +50,7 @@ cmds=(
   lsmod
   lsof
   lspci
-  make
+  # make
   mount
   mtr
   mvn
