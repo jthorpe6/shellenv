@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+function delete_local_tm_snapshots() {
+    for snapshot in $(tmutil listlocalsnapshots / | cut -d '.' -f 4 | grep -v Snapshots)
+    do
+	sudo tmutil deletelocalsnapshots $snapshot
+    done
+}
+
 function pullallthethings(){
     /bin/ls | xargs -I{} git -C {} pull
 }
