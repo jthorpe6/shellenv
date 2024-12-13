@@ -7,6 +7,9 @@ alias pyftpd='python3 -m pyftpdlib'
 # find / -name foo 2dn
 alias -g 2dn="2>/dev/null"
 
+# git pull over a directory
+alias pullallthethings="/bin/ls | xargs -I{} git -C {} pull"
+
 # Tempoary ssh; dont save to known hosts
 alias tssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias tscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
