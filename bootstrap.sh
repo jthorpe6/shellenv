@@ -2,7 +2,7 @@
 # shellcheck disable=SC2048
 
 GITURL="https://github.com/jthorpe6/shellenv.git"
-declare -a dotfiles=(".abbr_pwd" ".aliases" ".functions" ".grc.zsh" ".procs.toml" ".zshrc" ) 
+declare -a dotfiles=(".abbr_pwd" ".aliases" ".functions" ".grc.zsh" ".zshrc" ) 
 
 if type git &>/dev/null
 then
