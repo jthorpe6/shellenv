@@ -134,6 +134,9 @@ fi
 test -e "${HOME}/.functions" && source "${HOME}/.functions"
 test -e "${HOME}/.aliases" && source "${HOME}/.aliases"
 
+# gnu-sed is needed for some emacs things
+test -d "$(brew --prefix)/opt/gnu-sed/libexec/" && export PATH="$PATH:$(brew --prefix)/opt/gnu-sed/libexec/"
+
 # golang
 test -d "${HOME}/go/" && export GOPATH="${HOME}/go/"
 
