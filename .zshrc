@@ -137,6 +137,9 @@ test -e "${HOME}/.aliases" && source "${HOME}/.aliases"
 # gnu-sed is needed for some emacs things
 test -d "$(brew --prefix)/opt/gnu-sed/libexec/" && export PATH="$PATH:$(brew --prefix)/opt/gnu-sed/libexec/"
 
+# mac pdflatex
+test -d "/usr/local/texlive/2025basic/bin/universal-darwin/" && export PATH="$PATH:/usr/local/texlive/2025basic/bin/universal-darwin/"
+
 # golang
 test -d "${HOME}/go/" && export GOPATH="${HOME}/go/"
 
