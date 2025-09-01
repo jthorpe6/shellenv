@@ -153,7 +153,7 @@ test -e "${HOME}/.grc.zsh" && source "${HOME}/.grc.zsh"
 test -e "${HOME}/.ripgrep"  && export RIPGREP_CONFIG_PATH="${HOME}/.ripgrep"
 
 # for fzf
-test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh" && source <(fzf --zsh) && export FZF_COMPLETION_TRIGGER=''
+test -e "${HOME}/.fzf.zsh" && source "${HOME}/.fzf.zsh" && source <(fzf --zsh)
 
 # virtualenvwrapper
 test -e "$(brew --prefix)/bin/virtualenvwrapper.sh" && \
