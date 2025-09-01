@@ -197,6 +197,11 @@ then
         \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
+if type zoxide &>/dev/null
+then
+    eval "$(zoxide init zsh)"
+fi
+
 # tmux config
 CONFIGFILE="${HOME}/.tmux.conf"
 if [ ! -f $CONFIGFILE ]
