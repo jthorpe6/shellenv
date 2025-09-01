@@ -51,3 +51,68 @@ then
           -f org-html-export-to-html --kill
     }
 fi
+
+if type fzf &>/dev/null
+then
+    # https://github.com/junegunn/fzf/wiki/examples
+    function fzd() {
+	DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
+	    && cd "$DIR"
+    }
+
+    function fkill() {
+	local pid
+	if [ "$UID" != "0" ]; then
+            pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+	else
+            pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+	fi
+
+	if [ "x$pid" != "x" ]
+	then
+            echo $pid | xargs kill -${1:-9}
+	fi
+    }
+
+    function fshow() {
+	git log --graph --color=always \
+	    --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" "$@" |
+	    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+		--bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+		FZF-EOF"
+    }
+
+    if type brew &>/dev/null
+    then
+	function bip() {
+	    local inst=$(brew search "$@" | fzf -m)
+
+	    if [[ $inst ]]; then
+		for prog in $(echo $inst);
+		do; brew install $prog; done;
+	    fi
+	}
+
+	function bup() {
+	    local upd=$(brew leaves | fzf -m)
+
+	    if [[ $upd ]]; then
+		for prog in $(echo $upd);
+		do; brew upgrade $prog; done;
+	    fi
+	}
+
+	function bcp() {
+	    local uninst=$(brew leaves | fzf -m)
+
+	    if [[ $uninst ]]; then
+		for prog in $(echo $uninst);
+		do; brew uninstall $prog; done;
+	    fi
+	}
+    fi
+    
+fi
