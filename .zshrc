@@ -10,7 +10,7 @@ fpath+=~/.zfunc
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH # % compaudit | xargs chmod g-w
-  
+
     autoload -Uz compinit
     compinit
     export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/games:/usr/games:$HOME/.local/bin:$HOME/go/bin
@@ -54,7 +54,7 @@ test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupp
 if [ -f "${HOME}/.abbr_pwd" ]
 then
     source "${HOME}/.abbr_pwd"
-    
+
     git_info() {
 	branch=$(git symbolic-ref -q --short HEAD 2>/dev/null)
 	if [ -n "$branch" ]; then
@@ -183,9 +183,9 @@ then
     fi
 
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && 
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] &&
         \. "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && 
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] &&
         \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
@@ -222,3 +222,10 @@ run '~/.tmux/plugins/tpm/tpm'
 EOF
 mkdir -p "${HOME}/.tmux"
 fi
+
+export PATH="$PATH:/Applications/010 Editor.app/Contents/CmdLine" #ADDED BY 010 EDITOR
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jthorpe/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

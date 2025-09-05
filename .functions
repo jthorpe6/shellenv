@@ -1,27 +1,27 @@
 #!/usr/bin/env zsh
 
-function delete_local_tm_snapshots() {
+delete_local_tm_snapshots() {
     for snapshot in $(tmutil listlocalsnapshots / | cut -d '.' -f 4 | grep -v Snapshots)
     do
 	sudo tmutil deletelocalsnapshots $snapshot
     done
 }
 
-function gi() { 
+gi() {
     curl -sLw n "https://www.toptal.com/developers/gitignore/api/$@"
 }
 
-function encrypt() {
+encrypt() {
     local FILE=$1
     tar cz "$FILE" | openssl enc -aes-256-cbc -e -v > "$FILE.tar.gz.enc"
 }
 
-function synhilight(){
+synhilight(){
     FILENAME=$1
     if [[ -z "$FILENAME" ]]
     then
-	    printf "%s" "filename?: "
-	    read -r FILENAME
+	printf "%s" "filename?: "
+	read -r FILENAME
     fi
 
     pygmentize -f rtf -l r "$FILENAME" | pbcopy
@@ -29,38 +29,38 @@ function synhilight(){
 
 if type emacs &>/dev/null
 then
-    function magit(){
-            if [ -d "$1" ]; then
-                cd "$1" || exit
-            fi
-            emacsclient -nw -c -s ~/.emacs.d/server/server --eval "(magit)" --no-wait
+    magit(){
+        if [ -d "$1" ]; then
+            cd "$1" || exit
+        fi
+        emacsclient -nw -c -s ~/.emacs.d/server/server --eval "(magit)" --no-wait
     }
 
-    function htmlorg() {
+    htmlorg() {
         ORGFILE=$1
         if [[ -z "$ORGFILE" ]]
         then
-        	echo -e "Usage: $funcstack[1] <file.org> "
-        return
+            echo -e "Usage: $funcstack[1] <file.org> "
+            return
         fi
         emacs $ORGFILE --batch -q \
-         --eval '(setq user-full-name nil)' \
-         --eval '(setq org-html-validation-link nil)' \
-         --eval '(setq org-export-html-postamble nil)' \
-         --eval "(setq org-export-htmlize-output-type \'css)" \
-          -f org-html-export-to-html --kill
+              --eval '(setq user-full-name nil)' \
+              --eval '(setq org-html-validation-link nil)' \
+              --eval '(setq org-export-html-postamble nil)' \
+              --eval "(setq org-export-htmlize-output-type \'css)" \
+              -f org-html-export-to-html --kill
     }
 fi
 
 if type fzf &>/dev/null
 then
     # https://github.com/junegunn/fzf/wiki/examples
-    function fzd() {
+    fzd() {
 	DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
 	    && cd "$DIR"
     }
 
-    function fkill() {
+    fkill() {
 	local pid
 	if [ "$UID" != "0" ]; then
             pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
@@ -74,7 +74,7 @@ then
 	fi
     }
 
-    function fgl() {
+    fgl() {
 	git log --graph --color=always \
 	    --format="%C(auto)%h%d %s %C(white)%C(bold)%cr" "$@" |
 	    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
@@ -87,7 +87,7 @@ then
 
     if type brew &>/dev/null
     then
-	function bip() {
+	bip() {
 	    local inst=$(brew search "$@" | fzf -m)
 
 	    if [[ $inst ]]; then
@@ -96,7 +96,7 @@ then
 	    fi
 	}
 
-	function bup() {
+	bup() {
 	    local upd=$(brew leaves | fzf -m)
 
 	    if [[ $upd ]]; then
@@ -105,7 +105,7 @@ then
 	    fi
 	}
 
-	function bcp() {
+	bcp() {
 	    local uninst=$(brew leaves | fzf -m)
 
 	    if [[ $uninst ]]; then
@@ -114,5 +114,4 @@ then
 	    fi
 	}
     fi
-    
 fi
