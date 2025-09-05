@@ -72,24 +72,6 @@ then
 	echo "$commit"
     }
 
-
-    # precmd() {
-    #     if [ -d ".git" ] && [ $VIRTUAL_ENV ]
-    #     then
-    #         export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV) %F{2}$(git_info)%F{7}]%% %f"
-    # 	    PATH="$VIRTUAL_ENV/bin:$PATH"
-    #     elif [ $VIRTUAL_ENV ]
-    #     then
-    # 	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename $VIRTUAL_ENV)%F{7}]%% %f"
-    # 	    PATH="$VIRTUAL_ENV/bin:$PATH"
-    #     elif [ -d ".git" ]
-    #     then
-    #         export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(git_info)%F{7}]%% %f"
-    #     else
-    # 	    export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
-    #     fi
-    # }
-
     precmd() {
 	local dir="$PWD"
 	local git_dir=""
