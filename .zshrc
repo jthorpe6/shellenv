@@ -164,6 +164,16 @@ then
     eval "$(register-python-argcomplete pipx)"
 fi
 
+# pass
+if type pass &>/dev/null
+then
+    if [[ ! -f "$(brew --prefix)/share/zsh/site-functions/_pass" ]]
+    then
+	wget -O "$(brew --prefix)/share/zsh/site-functions/_pass" \
+	     https://git.zx2c4.com/password-store/plain/src/completion/pass.zsh-completion
+    fi
+fi
+
 # for nvm
 if [ -f "$(brew --prefix)/opt/nvm/nvm.sh" ]
 then
