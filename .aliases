@@ -16,70 +16,58 @@ alias tscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 # Too many times have I just set aliases and the program not installed. Not anymore
 
-if type git &>/dev/null
-then
+if type git &>/dev/null; then
     alias g='git'
 fi
 
-if type emacs &>/dev/null
-then
+if type emacs &>/dev/null; then
     alias emacsclient='emacsclient -s ~/.emacs.d/server/server'
     alias ec='emacsclient -nw -c -s ~/.emacs.d/server/server'
     alias ecc='emacsclient -n -c -s ~/.emacs.d/server/server'
     # alias emacs='emacs --daemon'
 fi
 
-if type eza &>/dev/null
-then
+if type eza &>/dev/null; then
     alias ls='eza'
     alias ll='eza --long --header --git'
     alias lt='eza --long --header --git --icons --tree'
     alias tree='eza --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
 fi
 
-if type zoxide &>/dev/null
-then
+if type zoxide &>/dev/null; then
     alias cd='z'
 fi
 
-if type prettyping &>/dev/null
-then
+if type prettyping &>/dev/null; then
     alias pping='prettyping --nolegend'
 fi
 
-if type bat &>/dev/null
-then
+if type bat &>/dev/null; then
     alias preview="fzf --preview 'bat --color \"always\" {}'"
     alias cat='bat -pp '
     alias less='bat '
 fi
 
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
     alias bupdate='brew update && brew upgrade; brew cleanup -s'
 fi
 
-if type brew-file &>/dev/null
-then
+if type brew-file &>/dev/null; then
     export HOMEBREW_BREWFILE_APPSTORE=0 
     alias bremote='brew-file init && brew-file push'
 fi
 
 # lldb stuff
-if type lldb &>/dev/null
-then
+if type lldb &>/dev/null; then
     alias lldbmr='lldb -s <(echo -e "b main\n run")'
     alias lldbr='lldb -o run'
-    if [ -f "$HOME/Documents/opt/lisa.py/lisa.py" ]
-    then
-        alias lisa='lldb -s <(echo -e command script import ~/Documents/opt/lisa.py/lisa.py) -s <(echo -e command script import ~/Documents/opt/polar.py)'
+    if [ -f "$HOME/Documents/opt/lisa.py/lisa.py" ]; then
+	alias lisa='lldb -s <(echo -e command script import ~/Documents/opt/lisa.py/lisa.py) -s <(echo -e command script import ~/Documents/opt/polar.py)'
     fi
-    if [ -f "$HOME/Documents/opt/lldbinit/lldbinit.py" ]
-    then
-        alias lldbinit='lldb -s <(echo -e command script import ~/Documents/opt/lldbinit/lldbinit.py)'
+    if [ -f "$HOME/Documents/opt/lldbinit/lldbinit.py" ]; then
+	alias lldbinit='lldb -s <(echo -e command script import ~/Documents/opt/lldbinit/lldbinit.py)'
     fi
-    if [ -f "$HOME/Documents/opt/llef/llef.py" ]
-    then
+    if [ -f "$HOME/Documents/opt/llef/llef.py" ]; then
 	alias llef='lldb -s <(echo -e command script import "/Users/jthorpe/Documents/opt/llef/llef.py"\\nsettings set stop-disassembly-display never)'
     fi
 fi
