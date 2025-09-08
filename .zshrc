@@ -51,8 +51,7 @@ test -d "/Library/Developer/KDKs/" && export kdks="/Library/Developer/KDKs/"
 test -d "${HOME}/Library/Developer/Xcode/iOS DeviceSupport" && export devicesupport="${HOME}/Library/Developer/Xcode/iOS DeviceSupport"
 
 # the prompt
-if [ -f "${HOME}/.abbr_pwd" ]
-then
+if [ -f "${HOME}/.abbr_pwd" ]; then
     source "${HOME}/.abbr_pwd"
 
     git_info() {
@@ -144,14 +143,12 @@ test -e "$(brew --prefix)/bin/virtualenvwrapper.sh" && \
 	    && test -d "${HOME}/.virtualenvs" && export WORKON_HOME="${HOME}/.virtualenvs"
 
 # use bat for less
-if type bat &>/dev/null
-then
+if type bat &>/dev/null; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
 # for pyenv
-if type pyenv &>/dev/null
-then
+if type pyenv &>/dev/null; then
     export PYENV_ROOT="$HOME/.pyenv"
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
@@ -159,14 +156,12 @@ then
 fi
 
 # for pipx
-if type pipx &>/dev/null
-then
+if type pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
 fi
 
 # pass
-if type pass &>/dev/null
-then
+if type pass &>/dev/null; then
     if [[ ! -f "$(brew --prefix)/share/zsh/site-functions/_pass" ]]
     then
 	wget -O "$(brew --prefix)/share/zsh/site-functions/_pass" \
@@ -175,29 +170,25 @@ then
 fi
 
 # for nvm
-if [ -f "$(brew --prefix)/opt/nvm/nvm.sh" ]
-then
-    if [ ! -d "${HOME}/.nvm" ]
-    then
-        mkdir -p "${HOME}/.nvm"
+if [ -f "$(brew --prefix)/opt/nvm/nvm.sh" ]; then
+    if [ ! -d "${HOME}/.nvm" ]; then
+	mkdir -p "${HOME}/.nvm"
     fi
 
     export NVM_DIR="$HOME/.nvm"
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] &&
-        \. "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
+	\. "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
     [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] &&
-        \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+	\. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi
 
-if type zoxide &>/dev/null
-then
+if type zoxide &>/dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
 # tmux config
 CONFIGFILE="${HOME}/.tmux.conf"
-if [ ! -f $CONFIGFILE ]
-then
+if [ ! -f $CONFIGFILE ]; then
 cat <<EOF >$CONFIGFILE
 set -g default-terminal screen-256color
 set-option -g status-interval 1
@@ -220,7 +211,7 @@ set-option -g status-style "bg=white,fg=black"
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 EOF
-mkdir -p "${HOME}/.tmux"
+    mkdir -p "${HOME}/.tmux"
 fi
 
 export PATH="$PATH:/Applications/010 Editor.app/Contents/CmdLine" #ADDED BY 010 EDITOR
