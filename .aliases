@@ -37,6 +37,11 @@ then
     alias tree='eza --long --icons --tree --no-filesize --no-permissions --no-user --no-time'
 fi
 
+if type zoxide &>/dev/null
+then
+    alias cd='z'
+fi
+
 if type prettyping &>/dev/null
 then
     alias pping='prettyping --nolegend'
