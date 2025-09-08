@@ -35,8 +35,7 @@ fi
 
 # macos or iphoneos sdk paths
 XCRUN=$(which xcrun)
-if [ -n "$XCRUN" ];
-then
+if [ -n "$XCRUN" ]; then
     export macosx_sdk="$($XCRUN --show-sdk-path -sdk macosx)/"
     export iphoneos_sdk="$($XCRUN --show-sdk-path -sdk iphoneos)/"
 fi
@@ -119,7 +118,8 @@ test -e "${HOME}/.aliases" && source "${HOME}/.aliases"
 test -d "$(brew --prefix)/opt/gnu-sed/libexec/" && export PATH="$PATH:$(brew --prefix)/opt/gnu-sed/libexec/"
 
 # mac pdflatex
-test -d "/usr/local/texlive/2025basic/bin/universal-darwin/" && export PATH="$PATH:/usr/local/texlive/2025basic/bin/universal-darwin/"
+test -d "/usr/local/texlive/2025basic/bin/universal-darwin/" \
+    && export PATH="$PATH:/usr/local/texlive/2025basic/bin/universal-darwin/"
 
 # golang
 test -d "${HOME}/go/" && export GOPATH="${HOME}/go/"
@@ -212,10 +212,3 @@ run '~/.tmux/plugins/tpm/tpm'
 EOF
     mkdir -p "${HOME}/.tmux"
 fi
-
-export PATH="$PATH:/Applications/010 Editor.app/Contents/CmdLine" #ADDED BY 010 EDITOR
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/jthorpe/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
