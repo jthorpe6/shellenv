@@ -71,6 +71,13 @@ if [ -f "${HOME}/.abbr_pwd" ]; then
     }
 
     precmd() {
+	local last_exit=$?
+	local exit_status_display=""
+
+	if [ $last_exit -ne 0 ]; then
+            exit_status_display="%F{1}($last_exit)%f"
+	fi
+
 	local dir="$PWD"
 	local git_dir=""
 	while [ "$dir" != "/" ]; do
@@ -95,16 +102,17 @@ if [ -f "${HOME}/.abbr_pwd" ]; then
             else
 		git_info="$(git -C "$git_dir" rev-parse --short HEAD)"
             fi
-            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} $virtual_env%F{2}$git_info%F{7}]%% %f"
+            export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} $virtual_env%F{2}$git_info%F{7}]$exit_status_display%% %f"
 	else
             if [ -n "$VIRTUAL_ENV" ]; then
-		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename "$VIRTUAL_ENV")%F{7}]%% %f"
+		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7} %F{2}$(basename "$VIRTUAL_ENV")%F{7}]$exit_status_display%% %f"
 		PATH="$VIRTUAL_ENV/bin:$PATH"
             else
-		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]%% %f"
+		export PS1="%F{7}[%F{7}$(pwd_abbr)%F{7}]$exit_status_display%% %f"
             fi
 	fi
     }
+
 else
     # export PS1="%F{8}[%F{4}%~%F{8}]%% %f"
     export PS1="%F{7}[%F{7}%~%F{7}]%% %f"
