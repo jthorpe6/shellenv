@@ -20,12 +20,9 @@ if type git &>/dev/null; then
     alias g='git'
 fi
 
-if type emacs &>/dev/null; then
-    alias emacsclient='emacsclient -s ~/.emacs.d/server/server'
-    alias ec='emacsclient -nw -c -s ~/.emacs.d/server/server'
-    alias ecc='emacsclient -n -c -s ~/.emacs.d/server/server'
-    # alias emacs='emacs --daemon'
-fi
+# if type emacs &>/dev/null; then
+
+# fi
 
 if type eza &>/dev/null; then
     alias ls='eza'

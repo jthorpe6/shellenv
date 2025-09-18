@@ -50,6 +50,18 @@ then
               --eval "(setq org-export-htmlize-output-type \'css)" \
               -f org-html-export-to-html --kill
     }
+    ec(){
+	local server="$HOME/.emacs.d/server/server"
+	if type jmacs &>/dev/null; then
+	    if [[ -S "$HOME/.emacs.d/server/server" ]]; then
+		emacsclient -nw -c -s $HOME/.emacs.d/server/server "$@"
+	    else
+		jmacs -nobackups -wordwrap "$@"
+	    fi
+	else
+	    emacsclient -nw -c -s $HOME/.emacs.d/server/server "$@"
+	fi
+    }
 fi
 
 if type fzf &>/dev/null
